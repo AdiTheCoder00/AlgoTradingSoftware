@@ -1,0 +1,553 @@
+[2m3:26:28 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m3:26:28 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:29 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:29 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:29 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:30 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:30 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:30 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/instruments[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:30 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:30 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/market/BTC-USD/candles?timeframe=15m&limit=200[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:30 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/market/BTC-USD/orderbook?depth=5[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:30 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/market/BTC-USD/execution-markers[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:30 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:30 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:30 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:31 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:31 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:31 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/instruments[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:31 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:31 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/market/BTC-USD/candles?timeframe=15m&limit=200[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:31 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/market/BTC-USD/orderbook?depth=5[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:31 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/market/BTC-USD/execution-markers[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:31 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:31 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:32 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:32 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:32 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/market/BTC-USD/execution-markers[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:26:32 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:28:22 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m3:28:23 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:28:23 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:28:23 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:28:24 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:28:24 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:28:24 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:28:24 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:28:25 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:28:26 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:30:53 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m3:43:05 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m3:43:05 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m3:43:06 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m3:43:08 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:34 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m5:47:34 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m5:47:34 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m5:47:35 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:35 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:35 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:35 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:35 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:36 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:37 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:37 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:37 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:37 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:37 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:38 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:39 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:40 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:40 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:41 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:41 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:41 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:43 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:43 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:43 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:43 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:45 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:45 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:45 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:45 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:47:45 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/market/BTC-USD/candles?timeframe=15m&limit=200[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:48:59 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m5:48:59 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m5:48:59 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:48:59 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:00 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:01 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:01 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:01 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:02 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:03 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:03 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:03 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:04 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:04 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:04 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:05 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:05 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:06 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:06 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:06 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:08 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/market/BTC-USD/execution-markers[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:08 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:08 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:09 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m5:49:09 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:07 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m6:05:07 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m6:05:08 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:08 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:08 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:09 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:09 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:10 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:10 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:10 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:10 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:10 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:11 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:11 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/NSE%3ARELIANCE/candles?timeframe=15m&limit=200[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:12 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:12 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:12 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:12 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:13 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:13 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/NSE%3ARELIANCE/candles?timeframe=15m&limit=200[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:14 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:14 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:16 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:16 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:17 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:18 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:18 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:18 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:18 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:19 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:20 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:20 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:20 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:20 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:21 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:22 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:05:24 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:06:32 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m6:06:32 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m6:06:32 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:06:32 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:06:32 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:06:32 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:06:32 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:07:58 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m6:07:58 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m6:07:58 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:07:58 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/NSE%3ARELIANCE/candles?timeframe=15m&limit=200[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:07:59 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:07:59 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:00 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:00 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/NSE%3ARELIANCE/candles?timeframe=15m&limit=200[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:00 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:01 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:01 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:02 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:02 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:02 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:02 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:04 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:04 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:04 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:04 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:04 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:04 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:05 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:06 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:06 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:09 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:09 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:09 AM[22m [31m[1m[vite][22m[39m [31mws proxy error:[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:10 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:10 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:10 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:10 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:11 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:12 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/quotes[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:12 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/fleet[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:12 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:12 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:14 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:16 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/positions[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:16 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/portfolio/summary[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+[2m6:08:16 AM[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/live/NSE%3ARELIANCE/candles?timeframe=15m&limit=200[39m
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)
+npm error Lifecycle script `dev` failed with error:
+npm error code 1
+npm error path C:\Users\maini\OneDrive\Desktop\algo 2\apps\web
+npm error workspace @kinetix/web@0.1.0
+npm error location C:\Users\maini\OneDrive\Desktop\algo 2\apps\web
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c vite

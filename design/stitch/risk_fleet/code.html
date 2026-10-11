@@ -1,0 +1,794 @@
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-variant": "#2d3449",
+          "background": "#0b1326",
+          "on-tertiary-container": "#8c0028",
+          "tertiary": "#ffbcbf",
+          "inverse-on-surface": "#283044",
+          "surface-container-high": "#222a3d",
+          "surface": "#0b1326",
+          "on-secondary-fixed-variant": "#005236",
+          "primary": "#8ed5ff",
+          "on-primary-fixed": "#001e2c",
+          "error-container": "#93000a",
+          "primary-fixed-dim": "#7bd0ff",
+          "on-primary-container": "#004965",
+          "surface-container-highest": "#2d3449",
+          "on-surface": "#dae2fd",
+          "on-primary": "#00354a",
+          "tertiary-container": "#ff929a",
+          "secondary-fixed-dim": "#4edea3",
+          "tertiary-fixed": "#ffdadb",
+          "outline": "#87929a",
+          "tertiary-fixed-dim": "#ffb2b7",
+          "error": "#ffb4ab",
+          "on-surface-variant": "#bdc8d1",
+          "on-tertiary": "#67001b",
+          "secondary-fixed": "#6ffbbe",
+          "inverse-primary": "#00668a",
+          "on-error-container": "#ffdad6",
+          "surface-container-lowest": "#060e20",
+          "surface-container": "#171f33",
+          "on-tertiary-fixed": "#40000d",
+          "on-secondary-container": "#00311f",
+          "primary-container": "#38bdf8",
+          "on-secondary": "#003824",
+          "surface-tint": "#7bd0ff",
+          "on-background": "#dae2fd",
+          "on-primary-fixed-variant": "#004c69",
+          "secondary": "#4edea3",
+          "outline-variant": "#3e484f",
+          "on-tertiary-fixed-variant": "#92002a",
+          "surface-container-low": "#131b2e",
+          "on-error": "#690005",
+          "secondary-container": "#00a572",
+          "surface-dim": "#0b1326",
+          "inverse-surface": "#dae2fd",
+          "surface-bright": "#31394d",
+          "on-secondary-fixed": "#002113",
+          "primary-fixed": "#c4e7ff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-sm": "0.5rem",
+          "gutter-desktop": "1.5rem",
+          "space-lg": "1.5rem",
+          "space-xl": "2.5rem",
+          "gutter": "1.25rem",
+          "space-md": "1rem",
+          "margin-desktop": "2rem",
+          "margin": "1rem",
+          "space-xs": "0.25rem"
+        },
+        "fontFamily": {
+          "body-md": [
+            "Inter"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "headline-lg-mobile": [
+            "Inter"
+          ],
+          "label-caption": [
+            "Inter"
+          ],
+          "headline-sm": [
+            "Inter"
+          ],
+          "label-numeric-lg": [
+            "JetBrains Mono"
+          ],
+          "headline-md": [
+            "Inter"
+          ],
+          "label-numeric-md": [
+            "JetBrains Mono"
+          ],
+          "label-numeric-sm": [
+            "JetBrains Mono"
+          ],
+          "headline-lg": [
+            "Inter"
+          ],
+          "headline-xl": [
+            "Inter"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "headline-xl-mobile": [
+            "Inter"
+          ]
+        },
+        "fontSize": {
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "0em",
+              "fontWeight": "400"
+            }
+          ],
+          "body-sm": [
+            "12px",
+            {
+              "lineHeight": "18px",
+              "letterSpacing": "0em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg-mobile": [
+            "22px",
+            {
+              "lineHeight": "30px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "label-caption": [
+            "11px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0.04em",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-sm": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "500"
+            }
+          ],
+          "label-numeric-lg": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-md": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "500"
+            }
+          ],
+          "label-numeric-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "400"
+            }
+          ],
+          "label-numeric-sm": [
+            "11px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-xl": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "-0.03em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.005em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-xl-mobile": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "600"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-gutter-desktop flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-xl flex-shrink-0"><div class="flex items-center gap-space-sm"><div class="w-7 h-7 rounded-xl bg-primary-container/20 flex items-center justify-center"><span class="material-symbols-outlined text-primary text-[18px]">terminal</span></div><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Kinetix<span class="text-primary font-headline-sm text-headline-sm ml-1">Algo</span></span></div><nav class="flex items-center gap-space-xs" data-active-classes="bg-surface-variant text-on-surface font-body-md text-body-md rounded-xl"><a class="px-space-md py-space-sm rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="live-trading" href="#">Live Trading</a><a class="px-space-md py-space-sm rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="strategy-ide" href="#">Strategy IDE</a><a class="px-space-md py-space-sm rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="ai-backtest" href="#">AI Backtest</a><a class="px-3.5 py-1.5 rounded-lg bg-[#1e2738] border border-slate-700/50 text-white font-medium shadow-sm transition-colors" data-path="risk-and-fleet" href="#">Risk &amp; Fleet</a></nav></div><div class="hidden xl:flex items-center gap-space-lg flex-shrink-0"><div class="flex items-center gap-space-sm px-space-md py-1 rounded-xl bg-surface-container"><span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider">Fleet P&amp;L</span><span class="font-label-numeric-md text-label-numeric-md text-secondary">+$142,890</span><span class="font-label-numeric-sm text-label-numeric-sm px-1.5 py-0.5 rounded bg-secondary/10 text-secondary">+3.1%</span></div><div class="flex items-center gap-space-sm px-space-md py-1 rounded-xl bg-surface-container"><span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider">Active Bots</span><span class="font-label-numeric-md text-label-numeric-md text-on-surface">18</span></div><div class="flex items-center gap-1.5 px-space-md py-1 rounded-xl bg-surface-container"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="font-label-caption text-label-caption text-on-surface-variant">Clean Status</span></div></div><div class="flex items-center gap-space-md flex-shrink-0"><div class="relative hidden md:block w-48 lg:w-60"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">search</span><input class="w-full pl-9 pr-space-md py-1.5 rounded-xl bg-surface-container text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-1 focus:ring-primary-container transition-all" placeholder="Search strategies, bots..." type="text"></div><button class="px-space-md py-1.5 rounded-xl bg-error-container/40 hover:bg-error-container text-error font-body-sm text-body-sm transition-colors flex items-center gap-1.5" type="button"><span class="material-symbols-outlined text-[16px]">power_settings_new</span><span class="">Disarm</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-background min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full px-gutter-desktop py-space-xl flex flex-col gap-space-xl max-w-[1600px] mx-auto">
+<!-- Top Strategic Context / Header Strip -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-caption text-label-caption text-secondary uppercase tracking-widest font-semibold">Institutional Sentinel v4.8</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Risk &amp; Fleet Monitor</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">Supervisory control plane for multi-venue execution fleets, real-time aggregate exposure, and automated capital defense systems.</p>
+</div>
+<!-- Quick Session Status Badges -->
+<div class="flex items-center gap-space-sm self-start md:self-auto bg-surface-container-low p-1.5 rounded-xl">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+<span class="font-label-caption text-label-caption text-on-surface">SOC-2 Type II Active</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container">
+<span class="material-symbols-outlined text-secondary text-[18px]">shield</span>
+<span class="font-label-caption text-label-caption text-on-surface">L3 Kill-Switch Armed</span>
+</div>
+</div>
+</div>
+<!-- Section 1: High-Level Health & Safety Bar (Master Strip) -->
+<div class="relative bg-surface-container rounded-xl p-space-lg shadow-xl overflow-hidden">
+<div class="absolute -right-20 -top-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+<!-- Health Status Block -->
+<div class="lg:col-span-4 flex items-center gap-space-md">
+<div class="relative flex items-center justify-center w-14 h-14 rounded-xl bg-surface-container-high flex-shrink-0">
+<span class="w-4 h-4 rounded-full bg-secondary shadow-[0_0_16px_rgba(78,222,163,0.8)]"></span>
+<div class="absolute inset-0 rounded-xl bg-secondary/10 animate-ping opacity-40"></div>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider">Fleet Core Health</span>
+<span class="font-headline-md text-headline-md text-on-surface truncate">All Systems Normal</span>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-numeric-sm text-label-numeric-sm text-secondary">0 Anomalies</span>
+<span class="text-on-surface-variant/40">•</span>
+<span class="font-label-caption text-label-caption text-slate-400">Sync: 120ms ago</span>
+</div>
+</div>
+</div>
+<!-- Fleet Margin Used Gauge -->
+<div class="lg:col-span-5 flex flex-col sm:flex-row items-start sm:items-center gap-space-lg bg-surface-container-low p-space-md rounded-xl">
+<div class="relative w-16 h-16 flex-shrink-0 flex items-center justify-center">
+<!-- Inline SVG Gauge Chart -->
+<svg class="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+<path class="text-surface-variant" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-primary-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="38.4, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-label-numeric-sm text-label-numeric-sm text-on-surface font-semibold">38.4%</span>
+</div>
+</div>
+<div class="flex flex-col min-w-0 w-full">
+<div class="flex items-center justify-between gap-space-sm mb-1">
+<span class="font-label-caption text-label-caption text-on-surface-variant uppercase tracking-wider">Margin Utilized</span>
+<span class="font-label-numeric-sm text-label-numeric-sm text-on-surface"><span class="text-primary-container font-semibold">$1.85M</span> / $4.82M</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 38.4%"></div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-caption text-label-caption mt-1">
+<span class="">Threshold Cap: 70.0%</span>
+<span class="text-secondary font-medium">$2.97M Available</span>
+</div>
+</div>
+</div>
+<!-- Master Pause Safeguard Button -->
+<div class="lg:col-span-3 flex lg:justify-end items-center">
+<div class="relative w-full lg:w-auto">
+<button class="w-full lg:w-auto px-space-lg py-3 rounded-xl bg-[#2a1b24] hover:bg-[#341f2c] border border-tertiary-container/40 text-tertiary-container transition-all flex items-center justify-center gap-space-sm shadow-md active:scale-95 group" id="emergency-pause-btn" type="button">
+<span class="material-symbols-outlined text-[20px] text-tertiary-container group-hover:scale-110 transition-transform">pause_circle</span>
+<div class="flex flex-col text-left">
+<span class="font-body-sm text-body-sm font-semibold text-tertiary-container leading-tight">Pause Active Fleet</span>
+<span class="font-label-caption text-label-caption text-slate-400 leading-tight">Temporary algorithmic execution hold</span>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Confirmation Modal Component (Hidden by default) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center p-space-md bg-background/80 backdrop-blur-md" id="killswitch-modal">
+<div class="bg-surface-container-high w-full max-w-lg rounded-xl p-space-xl shadow-2xl flex flex-col gap-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-error-container flex items-center justify-center text-error flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]">warning</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Execute Immediate Fleet Freeze?</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">This action halts all running strategy threads, immediately cancels active limit orders, and notifies liquidity routers.</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-space-xs">
+<div class="flex justify-between font-label-caption text-label-caption text-on-surface-variant">
+<span class="">Target Algorithms</span>
+<span class="text-on-surface font-semibold">4 Active Strategies</span>
+</div>
+<div class="flex justify-between font-label-caption text-label-caption text-on-surface-variant">
+<span class="">Open Committed Orders</span>
+<span class="text-on-surface font-semibold">12 Open Limit Orders</span>
+</div>
+<div class="flex justify-between font-label-caption text-label-caption text-on-surface-variant">
+<span class="">Action Latency</span>
+<span class="text-secondary font-semibold">&lt; 15 milliseconds</span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm">
+<button class="px-space-md py-2 rounded-xl bg-surface-variant text-on-surface font-body-sm text-body-sm hover:bg-surface-bright transition-colors" id="cancel-pause-btn" type="button">
+            Cancel
+          </button>
+<button class="px-space-lg py-2 rounded-xl bg-error-container text-error font-body-sm text-body-sm font-semibold hover:bg-error-container/80 transition-colors" id="confirm-pause-btn" type="button">
+            Confirm Full Stand-down
+          </button>
+</div>
+</div>
+</div>
+<!-- Section 2: Fleet Grid (Modern Modular Cards) -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">smart_toy</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Active Algorithm Fleet</h2>
+<span class="ml-2 font-label-numeric-sm text-label-numeric-sm px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant">4 Active / 0 Offline</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-3 py-1.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+<span class="">Filter Fleet</span>
+</button>
+<button class="px-3 py-1.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+<span class="">Deploy Strategy</span>
+</button>
+</div>
+</div>
+<!-- Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Bot Card 1: BTC Momentum Alpha -->
+<div class="bg-surface-container rounded-xl p-space-lg shadow-md flex flex-col justify-between gap-space-lg transition-transform hover:-translate-y-1">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-2">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="font-label-caption text-label-caption text-slate-400 font-medium">Binance USDS-M</span></div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight mt-0.5">BTC Momentum Alpha</h3>
+</div>
+<!-- Status Toggle Switch -->
+<div class="flex items-center">
+<button aria-pressed="true" class="bot-toggle w-10 h-5 flex items-center bg-secondary-container rounded-full p-0.5 cursor-pointer transition-colors" data-bot="btc-alpha" type="button">
+<div class="toggle-handle bg-on-secondary-fixed w-4 h-4 rounded-full shadow-md transform translate-x-5 transition-transform"></div>
+</button>
+</div>
+</div>
+<!-- Metric Box -->
+<div class="grid grid-cols-2 gap-space-sm p-space-sm rounded-xl bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-caption text-label-caption text-on-surface-variant">Allocated Margin</span>
+<span class="font-label-numeric-md text-label-numeric-md text-on-surface font-medium mt-0.5">$850,000</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caption text-label-caption text-on-surface-variant">24h Net P&amp;L</span>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="font-label-numeric-md text-label-numeric-md text-secondary font-semibold">+$28,490</span>
+<span class="font-label-numeric-sm text-label-numeric-sm text-secondary bg-secondary/10 px-1 py-0.2 rounded">+3.4%</span>
+</div>
+</div>
+</div>
+<!-- Mini Sparkline Visualization -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-caption text-label-caption"><span class="text-slate-400">Intraday Drift</span><span class="text-secondary font-medium">High Sharpe (2.84)</span></div>
+<div class="h-10 w-full pt-1">
+<svg class="w-full h-full text-secondary" fill="none" stroke="currentColor" viewBox="0 0 160 36">
+<path d="M0,28 L24,24 L48,27 L72,18 L96,19 L120,8 L144,12 L160,4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container">
+<span class="bot-status-text font-label-caption text-label-caption text-secondary flex items-center gap-1 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Running
+            </span>
+<a class="font-body-sm text-body-sm text-primary hover:text-primary-container flex items-center gap-1 font-medium transition-colors" href="#">
+<span class="">View Details</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Bot Card 2: ETH Cross-Venue Arb -->
+<div class="bg-surface-container rounded-xl p-space-lg shadow-md flex flex-col justify-between gap-space-lg transition-transform hover:-translate-y-1">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-2">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="font-label-caption text-label-caption text-slate-400 font-medium">Bybit Perps</span></div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight mt-0.5">ETH Cross-Venue Arb</h3>
+</div>
+<!-- Status Toggle Switch -->
+<div class="flex items-center">
+<button aria-pressed="true" class="bot-toggle w-10 h-5 flex items-center bg-secondary-container rounded-full p-0.5 cursor-pointer transition-colors" data-bot="eth-arb" type="button">
+<div class="toggle-handle bg-on-secondary-fixed w-4 h-4 rounded-full shadow-md transform translate-x-5 transition-transform"></div>
+</button>
+</div>
+</div>
+<!-- Metric Box -->
+<div class="grid grid-cols-2 gap-space-sm p-space-sm rounded-xl bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-caption text-label-caption text-on-surface-variant">Allocated Margin</span>
+<span class="font-label-numeric-md text-label-numeric-md text-on-surface font-medium mt-0.5">$620,000</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caption text-label-caption text-on-surface-variant">24h Net P&amp;L</span>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="font-label-numeric-md text-label-numeric-md text-secondary font-semibold">+$19,230</span>
+<span class="font-label-numeric-sm text-label-numeric-sm text-secondary bg-secondary/10 px-1 py-0.2 rounded">+3.1%</span>
+</div>
+</div>
+</div>
+<!-- Mini Sparkline Visualization -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-caption text-label-caption"><span class="text-slate-400">Spread Capture</span><span class="text-secondary font-medium">99.2% Fill Rate</span></div>
+<div class="h-10 w-full pt-1">
+<svg class="w-full h-full text-secondary" fill="none" stroke="currentColor" viewBox="0 0 160 36">
+<path d="M0,22 L20,20 L40,21 L60,16 L80,14 L100,12 L120,10 L140,7 L160,5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container">
+<span class="bot-status-text font-label-caption text-label-caption text-secondary flex items-center gap-1 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Running
+            </span>
+<a class="font-body-sm text-body-sm text-primary hover:text-primary-container flex items-center gap-1 font-medium transition-colors" href="#">
+<span class="">View Details</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Bot Card 3: NQ Mean Reversion -->
+<div class="bg-surface-container rounded-xl p-space-lg shadow-md flex flex-col justify-between gap-space-lg transition-transform hover:-translate-y-1">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-2">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="font-label-caption text-label-caption text-slate-400 font-medium">CME FIX direct</span></div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight mt-0.5">NQ Mean Reversion</h3>
+</div>
+<!-- Status Toggle Switch -->
+<div class="flex items-center">
+<button aria-pressed="true" class="bot-toggle w-10 h-5 flex items-center bg-secondary-container rounded-full p-0.5 cursor-pointer transition-colors" data-bot="nq-revert" type="button">
+<div class="toggle-handle bg-on-secondary-fixed w-4 h-4 rounded-full shadow-md transform translate-x-5 transition-transform"></div>
+</button>
+</div>
+</div>
+<!-- Metric Box -->
+<div class="grid grid-cols-2 gap-space-sm p-space-sm rounded-xl bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-caption text-label-caption text-on-surface-variant">Allocated Margin</span>
+<span class="font-label-numeric-md text-label-numeric-md text-on-surface font-medium mt-0.5">$1,200,000</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caption text-label-caption text-on-surface-variant">24h Net P&amp;L</span>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="font-label-numeric-md text-label-numeric-md text-secondary font-semibold">+$44,610</span>
+<span class="font-label-numeric-sm text-label-numeric-sm text-secondary bg-secondary/10 px-1 py-0.2 rounded">+3.7%</span>
+</div>
+</div>
+</div>
+<!-- Mini Sparkline Visualization -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-caption text-label-caption"><span class="text-slate-400">Statistical Bands</span><span class="text-primary font-medium">Vol Filter Normal</span></div>
+<div class="h-10 w-full pt-1">
+<svg class="w-full h-full text-secondary" fill="none" stroke="currentColor" viewBox="0 0 160 36">
+<path d="M0,32 L22,26 L45,15 L70,22 L95,14 L120,6 L140,8 L160,2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container">
+<span class="bot-status-text font-label-caption text-label-caption text-secondary flex items-center gap-1 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Running
+            </span>
+<a class="font-body-sm text-body-sm text-primary hover:text-primary-container flex items-center gap-1 font-medium transition-colors" href="#">
+<span class="">View Details</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Bot Card 4: SOL Microstructure (Throttled Amber) -->
+<div class="bg-surface-container rounded-xl p-space-lg shadow-md flex flex-col justify-between gap-space-lg transition-transform hover:-translate-y-1">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-start justify-between gap-2">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span><span class="font-label-caption text-label-caption text-slate-400 font-medium">Binance Spot</span></div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight mt-0.5">SOL Microstructure</h3>
+</div>
+<!-- Status Toggle Switch (Amber Throttled) -->
+<div class="flex items-center">
+<button aria-pressed="true" class="bot-toggle w-10 h-5 flex items-center bg-tertiary-container/30 rounded-full p-0.5 cursor-pointer transition-colors" data-bot="sol-micro" type="button">
+<div class="toggle-handle bg-tertiary-container w-4 h-4 rounded-full shadow-md transform translate-x-5 transition-transform"></div>
+</button>
+</div>
+</div>
+<!-- Metric Box -->
+<div class="grid grid-cols-2 gap-space-sm p-space-sm rounded-xl bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-caption text-label-caption text-on-surface-variant">Allocated Margin</span>
+<span class="font-label-numeric-md text-label-numeric-md text-on-surface font-medium mt-0.5">$310,000</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caption text-label-caption text-on-surface-variant">24h Net P&amp;L</span>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="font-label-numeric-md text-label-numeric-md text-tertiary-container font-semibold">-$3,150</span>
+<span class="font-label-numeric-sm text-label-numeric-sm text-tertiary-container bg-tertiary-container/10 px-1 py-0.2 rounded">-1.0%</span>
+</div>
+</div>
+</div>
+<!-- Mini Sparkline Visualization (Downturn) -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-caption text-label-caption"><span class="text-slate-400">Execution Status</span><span class="text-tertiary-container font-medium">Order Sizing -40%</span></div>
+<div class="h-10 w-full pt-1">
+<svg class="w-full h-full text-tertiary-container" fill="none" stroke="currentColor" viewBox="0 0 160 36">
+<path d="M0,8 L24,10 L48,6 L72,16 L96,18 L120,24 L144,22 L160,30" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container">
+<span class="bot-status-text font-label-caption text-label-caption text-tertiary-container flex items-center gap-1 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span>Throttled
+            </span>
+<a class="font-body-sm text-body-sm text-primary hover:text-primary-container flex items-center gap-1 font-medium transition-colors" href="#">
+<span class="">View Details</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3 & 4: Two-Column Split (Simplified Risk Guardrails + API Latency Health) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Section 3: Risk Guardrails (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md bg-surface-container rounded-xl p-space-lg shadow-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Automated Risk Guardrails</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Hardware-level programmatic constraints enforced pre-trade.</p>
+</div>
+<span class="font-label-caption text-label-caption px-2.5 py-1 rounded-xl bg-surface-container-high text-on-surface-variant self-start sm:self-auto">Zero Bypass Override Enabled</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mt-space-sm">
+<!-- Guardrail 1: Fat-Finger Cap -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-[22px]">touch_app</span>
+<!-- Switch -->
+<button aria-pressed="true" class="guardrail-toggle w-9 h-5 flex items-center bg-primary-container rounded-full p-0.5 cursor-pointer transition-colors" type="button">
+<div class="bg-on-primary-fixed w-4 h-4 rounded-full shadow-md transform translate-x-4 transition-transform"></div>
+</button>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-medium mt-1">Fat-Finger Cap</h4>
+<p class="font-body-sm text-body-sm text-slate-400">Max single ticket limit: <span class="text-on-surface font-semibold">$250,000</span></p>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-numeric-sm text-label-numeric-sm text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Active
+              </span>
+<span class="font-label-caption text-label-caption text-slate-400">0 Rejections today</span>
+</div>
+</div>
+<!-- Guardrail 2: Max Portfolio Drawdown -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-[22px]">trending_down</span>
+<!-- Switch -->
+<button aria-pressed="true" class="guardrail-toggle w-9 h-5 flex items-center bg-primary-container rounded-full p-0.5 cursor-pointer transition-colors" type="button">
+<div class="bg-on-primary-fixed w-4 h-4 rounded-full shadow-md transform translate-x-4 transition-transform"></div>
+</button>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-medium mt-1">Portfolio Drawdown</h4>
+<p class="font-body-sm text-body-sm text-slate-400">Auto-pause fleet if loss hits <span class="text-on-surface font-semibold">5.0% DD</span></p>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-numeric-sm text-label-numeric-sm text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Active
+              </span>
+<span class="font-label-caption text-label-caption text-slate-400">Current DD: 0.18%</span>
+</div>
+</div>
+<!-- Guardrail 3: Market Slippage Limit -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-[22px]">waterfall_chart</span>
+<!-- Switch -->
+<button aria-pressed="true" class="guardrail-toggle w-9 h-5 flex items-center bg-primary-container rounded-full p-0.5 cursor-pointer transition-colors" type="button">
+<div class="bg-on-primary-fixed w-4 h-4 rounded-full shadow-md transform translate-x-4 transition-transform"></div>
+</button>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-medium mt-1">Slippage Limiter</h4>
+<p class="font-body-sm text-body-sm text-slate-400">Auto-cancel orders if slippage &gt; <span class="text-on-surface font-semibold">0.15%</span></p>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-numeric-sm text-label-numeric-sm text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Active
+              </span>
+<span class="font-label-caption text-label-caption text-slate-400">Avg slip: 0.021%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 4: Venue API Health Strip (4 Cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md bg-surface-container rounded-xl p-space-lg shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">hub</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Venue Link Latency</h2>
+</div>
+<span class="font-label-caption text-label-caption text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>All Connected
+          </span>
+</div>
+<div class="flex flex-col gap-space-sm mt-space-xs">
+<!-- Venue Item: CME FIX -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-variant flex items-center justify-center font-label-numeric-sm text-label-numeric-sm text-on-surface font-semibold">
+                CME
+              </div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium leading-tight">CME FIX Direct</span>
+<span class="font-label-caption text-label-caption text-on-surface-variant leading-tight">Chicago Equinix NY4</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-numeric-md text-label-numeric-md text-secondary font-semibold">4ms</span>
+<span class="font-label-caption text-label-caption px-2 py-0.5 rounded-full bg-secondary/10 text-secondary">Optimal</span>
+</div>
+</div>
+<!-- Venue Item: Binance -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-variant flex items-center justify-center font-label-numeric-sm text-label-numeric-sm text-on-surface font-semibold">
+                BN
+              </div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium leading-tight">Binance Futures</span>
+<span class="font-label-caption text-label-caption text-on-surface-variant leading-tight">Tokyo Cross-Connect</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-numeric-md text-label-numeric-md text-secondary font-semibold">12ms</span>
+<span class="font-label-caption text-label-caption px-2 py-0.5 rounded-full bg-secondary/10 text-secondary">Good</span>
+</div>
+</div>
+<!-- Venue Item: Bybit -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-variant flex items-center justify-center font-label-numeric-sm text-label-numeric-sm text-on-surface font-semibold">
+                BY
+              </div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium leading-tight">Bybit Perps</span>
+<span class="font-label-caption text-label-caption text-on-surface-variant leading-tight">Singapore Colo 2</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-numeric-md text-label-numeric-md text-secondary font-semibold">18ms</span>
+<span class="font-label-caption text-label-caption px-2 py-0.5 rounded-full bg-secondary/10 text-secondary">Good</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Interactive Controls for Demo Safeguard & Toggles
+  document.addEventListener('DOMContentLoaded', () => {
+    const pauseBtn = document.getElementById('emergency-pause-btn');
+    const modal = document.getElementById('killswitch-modal');
+    const cancelBtn = document.getElementById('cancel-pause-btn');
+    const confirmBtn = document.getElementById('confirm-pause-btn');
+
+    if (pauseBtn && modal) {
+      pauseBtn.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+      });
+      cancelBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+      });
+      confirmBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+        // Toggle all bots to paused
+        document.querySelectorAll('.bot-toggle').forEach(toggle => {
+          const handle = toggle.querySelector('.toggle-handle');
+          toggle.classList.remove('bg-secondary-container', 'bg-tertiary-container/30');
+          toggle.classList.add('bg-surface-variant');
+          handle.classList.remove('translate-x-5');
+          handle.classList.add('translate-x-0', 'bg-on-surface-variant');
+          toggle.setAttribute('aria-pressed', 'false');
+        });
+        document.querySelectorAll('.bot-status-text').forEach(status => {
+          status.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-error"></span>Paused';
+          status.className = 'bot-status-text font-label-caption text-label-caption text-error flex items-center gap-1 font-medium';
+        });
+        pauseBtn.classList.remove('bg-error-container');
+        pauseBtn.classList.add('bg-surface-variant');
+        pauseBtn.innerHTML = `
+          <span class="material-symbols-outlined text-[20px] text-on-surface-variant">lock</span>
+          <div class="flex flex-col text-left">
+            <span class="font-body-sm text-body-sm font-semibold text-on-surface leading-tight">Fleet Frozen</span>
+            <span class="font-label-caption text-label-caption text-on-surface-variant leading-tight">All executions paused</span>
+          </div>
+        `;
+      });
+    }
+
+    // Individual Bot Toggles
+    document.querySelectorAll('.bot-toggle').forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const handle = toggle.querySelector('.toggle-handle');
+        const card = toggle.closest('.bg-surface-container');
+        const statusText = card.querySelector('.bot-status-text');
+        const isPressed = toggle.getAttribute('aria-pressed') === 'true';
+
+        if (isPressed) {
+          toggle.classList.remove('bg-secondary-container', 'bg-tertiary-container/30');
+          toggle.classList.add('bg-surface-variant');
+          handle.classList.remove('translate-x-5');
+          handle.classList.add('translate-x-0', 'bg-on-surface-variant');
+          toggle.setAttribute('aria-pressed', 'false');
+          statusText.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-on-surface-variant"></span>Standby';
+          statusText.className = 'bot-status-text font-label-caption text-label-caption text-on-surface-variant flex items-center gap-1 font-medium';
+        } else {
+          toggle.classList.add('bg-secondary-container');
+          toggle.classList.remove('bg-surface-variant');
+          handle.classList.add('translate-x-5');
+          handle.classList.remove('translate-x-0', 'bg-on-surface-variant');
+          toggle.setAttribute('aria-pressed', 'true');
+          statusText.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Running';
+          statusText.className = 'bot-status-text font-label-caption text-label-caption text-secondary flex items-center gap-1 font-medium';
+        }
+      });
+    });
+
+    // Guardrail Toggles
+    document.querySelectorAll('.guardrail-toggle').forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const handle = toggle.firstElementChild;
+        const isPressed = toggle.getAttribute('aria-pressed') === 'true';
+        if (isPressed) {
+          toggle.classList.remove('bg-primary-container');
+          toggle.classList.add('bg-surface-variant');
+          handle.classList.remove('translate-x-4');
+          handle.classList.add('translate-x-0', 'bg-on-surface-variant');
+          toggle.setAttribute('aria-pressed', 'false');
+        } else {
+          toggle.classList.add('bg-primary-container');
+          toggle.classList.remove('bg-surface-variant');
+          handle.classList.add('translate-x-4');
+          handle.classList.remove('translate-x-0', 'bg-on-surface-variant');
+          toggle.setAttribute('aria-pressed', 'true');
+        }
+      });
+    });
+  });
+</script></main><footer class="w-full bg-surface-container-low py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full px-gutter-desktop flex flex-col sm:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-md"><span class="font-label-caption text-label-caption text-on-surface-variant">© 2025 Kinetix Algo Corp. Institutional Architecture.</span><span class="w-1 h-1 rounded-full bg-surface-variant"></span><span class="font-label-caption text-label-caption text-secondary flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>OMS Latency: 42µs</span></div><div class="flex items-center gap-space-lg"><a class="font-label-caption text-label-caption text-on-surface-variant hover:text-on-surface transition-colors" data-path="system-telemetry" href="#">System Telemetry</a><a class="font-label-caption text-label-caption text-on-surface-variant hover:text-on-surface transition-colors" data-path="compliance-audit" href="#">Compliance Audit</a><a class="font-label-caption text-label-caption text-on-surface-variant hover:text-on-surface transition-colors" data-path="api-gateway" href="#">API Gateway</a></div></div></footer>
+
+</body></html>

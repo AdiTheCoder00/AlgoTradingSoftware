@@ -1,0 +1,32 @@
+{
+  "name": "kinetix-algo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Kinetix Algo — algorithmic trading platform: React terminal, Node/TypeScript engine, simulated and Kotak Neo broker venues.",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "build:shared": "npm run build -w @kinetix/shared",
+    "dev": "npm run build:shared && concurrently -k -n api,web -c cyan,magenta \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "npm run dev -w @kinetix/api",
+    "dev:web": "npm run dev -w @kinetix/web",
+    "build": "npm run build:shared && npm run build -w @kinetix/web",
+    "typecheck": "npm run build:shared && npm run typecheck -w @kinetix/api && npm run typecheck -w @kinetix/web",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "seed": "npm run seed -w @kinetix/api",
+    "start": "npm run start -w @kinetix/api"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "concurrently": "^10.0.6",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  }
+}

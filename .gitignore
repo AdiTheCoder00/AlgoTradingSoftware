@@ -1,0 +1,26 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+# local runtime state
+apps/api/data/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# secrets — never commit broker credentials
+.env
+.env.local
+.env.*.local
+!/.env.example
+
+# logs & editor noise
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+coverage/

@@ -1,0 +1,25 @@
+{
+  "name": "@kinetix/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Zod contracts, domain types and WebSocket envelope shared by the Kinetix Algo API and web terminal.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
+  }
+}

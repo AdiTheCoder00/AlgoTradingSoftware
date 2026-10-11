@@ -1,0 +1,273 @@
+@import 'tailwindcss';
+
+/* ============================================================================
+ * Kinetix Algo design tokens.
+ *
+ * Ported from the Tailwind config embedded in the Stitch mockups (which matches
+ * the frontmatter of design/stitch/serene_quant/DESIGN.md). Class names are kept
+ * identical to the mockups' — `bg-surface-container-low`, `text-on-surface-variant`,
+ * `p-space-lg`, `font-label-caption` — so the migrated markup stays legible
+ * against the original design.
+ *
+ * NOTE: DESIGN.md's prose section quotes a different palette (#0b0f19 / #0f172a /
+ * #10b981 / #f43f5e) than its own frontmatter. The frontmatter and the mockups
+ * agree with each other, so those values are treated as ground truth and the
+ * prose palette is used only for the elevation/border layer.
+ * ==========================================================================*/
+
+@theme {
+  /* --- surface ramp ------------------------------------------------------- */
+  --color-background: #0b1326;
+  --color-on-background: #dae2fd;
+  --color-surface: #0b1326;
+  --color-surface-dim: #0b1326;
+  --color-surface-bright: #31394d;
+  --color-surface-variant: #2d3449;
+  --color-surface-tint: #7bd0ff;
+  --color-surface-container-lowest: #060e20;
+  --color-surface-container-low: #131b2e;
+  --color-surface-container: #171f33;
+  --color-surface-container-high: #222a3d;
+  --color-surface-container-highest: #2d3449;
+
+  /* --- content ------------------------------------------------------------ */
+  --color-on-surface: #dae2fd;
+  --color-on-surface-variant: #bdc8d1;
+  --color-inverse-surface: #dae2fd;
+  --color-inverse-on-surface: #283044;
+  --color-outline: #87929a;
+  --color-outline-variant: #3e484f;
+
+  /* --- primary (sky) ------------------------------------------------------ */
+  --color-primary: #8ed5ff;
+  --color-on-primary: #00354a;
+  --color-primary-container: #38bdf8;
+  --color-on-primary-container: #004965;
+  --color-inverse-primary: #00668a;
+  --color-primary-fixed: #c4e7ff;
+  --color-primary-fixed-dim: #7bd0ff;
+  --color-on-primary-fixed: #001e2c;
+  --color-on-primary-fixed-variant: #004c69;
+
+  /* --- secondary (emerald) ------------------------------------------------ */
+  --color-secondary: #4edea3;
+  --color-on-secondary: #003824;
+  --color-secondary-container: #00a572;
+  --color-on-secondary-container: #00311f;
+  --color-secondary-fixed: #6ffbbe;
+  --color-secondary-fixed-dim: #4edea3;
+  --color-on-secondary-fixed: #002113;
+  --color-on-secondary-fixed-variant: #005236;
+
+  /* --- tertiary (crimson) ------------------------------------------------- */
+  --color-tertiary: #ffbcbf;
+  --color-on-tertiary: #67001b;
+  --color-tertiary-container: #ff929a;
+  --color-on-tertiary-container: #8c0028;
+  --color-tertiary-fixed: #ffdadb;
+  --color-tertiary-fixed-dim: #ffb2b7;
+  --color-on-tertiary-fixed: #40000d;
+  --color-on-tertiary-fixed-variant: #92002a;
+
+  /* --- error -------------------------------------------------------------- */
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  /* --- shape -------------------------------------------------------------- */
+  --radius-DEFAULT: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  /* --- spacing ------------------------------------------------------------ */
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2.5rem;
+  --spacing-gutter: 1.25rem;
+  --spacing-gutter-desktop: 1.5rem;
+  --spacing-margin: 1rem;
+  --spacing-margin-desktop: 2rem;
+
+  /* --- type families ------------------------------------------------------ */
+  --font-body-lg: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-body-md: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-body-sm: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-headline-xl: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-headline-xl-mobile: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-headline-lg: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-headline-lg-mobile: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-headline-md: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-headline-sm: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-label-caption: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-label-numeric-lg: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --font-label-numeric-md: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --font-label-numeric-sm: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* --- type scale --------------------------------------------------------- */
+  --text-headline-xl: 36px;
+  --text-headline-xl--line-height: 44px;
+  --text-headline-xl--letter-spacing: -0.03em;
+  --text-headline-xl--font-weight: 600;
+
+  --text-headline-xl-mobile: 28px;
+  --text-headline-xl-mobile--line-height: 36px;
+  --text-headline-xl-mobile--letter-spacing: -0.02em;
+  --text-headline-xl-mobile--font-weight: 600;
+
+  --text-headline-lg: 28px;
+  --text-headline-lg--line-height: 36px;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 600;
+
+  --text-headline-lg-mobile: 22px;
+  --text-headline-lg-mobile--line-height: 30px;
+  --text-headline-lg-mobile--letter-spacing: -0.01em;
+  --text-headline-lg-mobile--font-weight: 600;
+
+  --text-headline-md: 20px;
+  --text-headline-md--line-height: 28px;
+  --text-headline-md--letter-spacing: -0.015em;
+  --text-headline-md--font-weight: 500;
+
+  --text-headline-sm: 16px;
+  --text-headline-sm--line-height: 24px;
+  --text-headline-sm--letter-spacing: -0.01em;
+  --text-headline-sm--font-weight: 500;
+
+  --text-body-lg: 16px;
+  --text-body-lg--line-height: 24px;
+  --text-body-lg--letter-spacing: -0.005em;
+
+  --text-body-md: 14px;
+  --text-body-md--line-height: 20px;
+
+  --text-body-sm: 12px;
+  --text-body-sm--line-height: 18px;
+
+  --text-label-caption: 11px;
+  --text-label-caption--line-height: 16px;
+  --text-label-caption--letter-spacing: 0.04em;
+  --text-label-caption--font-weight: 500;
+
+  --text-label-numeric-lg: 20px;
+  --text-label-numeric-lg--line-height: 28px;
+  --text-label-numeric-lg--letter-spacing: -0.02em;
+  --text-label-numeric-lg--font-weight: 500;
+
+  --text-label-numeric-md: 14px;
+  --text-label-numeric-md--line-height: 20px;
+  --text-label-numeric-md--letter-spacing: -0.01em;
+
+  --text-label-numeric-sm: 11px;
+  --text-label-numeric-sm--line-height: 16px;
+
+  /* --- elevation layer (DESIGN.md prose palette) --------------------------- */
+  --color-hairline: rgb(148 163 184 / 0.08);
+  --color-hairline-strong: rgb(148 163 184 / 0.16);
+  --shadow-flyout: 0 16px 32px -8px rgb(0 0 0 / 0.5);
+  --shadow-card: 0 1px 8px rgb(0 0 0 / 0.04);
+}
+
+/* ============================================================================
+ * Base
+ * ==========================================================================*/
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    overscroll-behavior: none;
+    background-color: var(--color-background);
+    color: var(--color-on-surface);
+    font-family: var(--font-body-md);
+    font-size: var(--text-body-md);
+    line-height: var(--text-body-md--line-height);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Every dynamic numerical value is tabular so digits do not jitter as the
+     tape updates — a stated requirement of the design system. */
+  .font-label-numeric-lg,
+  .font-label-numeric-md,
+  .font-label-numeric-sm {
+    font-variant-numeric: tabular-nums;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary-container);
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-surface-container-lowest);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-surface-container-highest);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-surface-bright);
+  }
+
+  /* Respect a reduced-motion preference: the pulsing live indicators are
+     decoration, not information. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Hairline perimeter used in place of heavy borders. */
+  .border-hairline {
+    border: 1px solid var(--color-hairline);
+  }
+
+  .border-hairline-strong {
+    border: 1px solid var(--color-hairline-strong);
+  }
+
+  .text-tone-positive {
+    color: var(--color-secondary);
+  }
+
+  .text-tone-negative {
+    color: var(--color-tertiary-container);
+  }
+
+  .text-tone-neutral {
+    color: var(--color-on-surface-variant);
+  }
+
+  /* Material Symbols defaults, matching the mockups' usage. */
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+    line-height: 1;
+    user-select: none;
+  }
+}
