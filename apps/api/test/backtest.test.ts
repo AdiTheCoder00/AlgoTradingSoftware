@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   BACKTEST_INITIAL_EQUITY,
   computeBands,
+  computeEma,
   computeRsi,
   computeSma,
   computeStdDev,
@@ -90,6 +91,22 @@ describe('indicator math', () => {
     const falling = Array.from({ length: 40 }, (_, index) => 200 - index);
     expect(computeRsi(rising, 14)[39]).toBe(100);
     expect(computeRsi(falling, 14)[39]).toBe(0);
+  });
+
+  it('computes exponential moving average accurately', () => {
+    const flat = Array.from({ length: 20 }, () => 100);
+    const emaFlat = computeEma(flat, 9);
+    expect(emaFlat[8]).toBe(100);
+    expect(emaFlat[19]).toBe(100);
+
+    const values = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+    const ema = computeEma(values, 3);
+    expect(ema[0]).toBeNull();
+    expect(ema[1]).toBeNull();
+    expect(ema[2]).toBe(11); // SMA(10, 11, 12) = 11
+    // multiplier = 2 / 4 = 0.5
+    // ema[3] = 13 * 0.5 + 11 * 0.5 = 12
+    expect(ema[3]).toBe(12);
   });
 });
 
@@ -184,5 +201,46 @@ describe('backtest engine', () => {
     for (const trade of run.trades) {
       expect(trade.quantity * trade.entryPrice).toBeLessThan(BACKTEST_INITIAL_EQUITY);
     }
+  });
+
+  it('runs backtests for EMA 9/21 cross + RSI + 100 EMA trend strategy', () => {
+    const emaSource = `import kinetix.algo as kx
+
+@kx.strategy(symbol="RELIANCE", interval="15m")
+class EmaCrossRsiFilterStrategy(kx.BaseStrategy):
+    def on_init(self):
+        self.ema_fast = kx.EMA(period=9)
+        self.ema_slow = kx.EMA(period=21)
+        self.ema_trend = kx.EMA(period=100)
+        self.rsi = kx.RSI(period=14)
+
+    def on_candle(self, candle: kx.Candle):
+        if self.ema_fast > self.ema_slow and self.rsi > 60 and candle.close > self.ema_trend:
+            self.order_target_percent(target=0.10, stop_loss_pct=1.5, tag="EMA_Cross_Long")
+        elif self.ema_fast < self.ema_slow and self.rsi < 40 and candle.close < self.ema_trend:
+            self.order_target_percent(target=-0.10, stop_loss_pct=1.5, tag="EMA_Cross_Short")
+`;
+    const parsedEma = parseStrategy(emaSource);
+    expect(parsedEma.ok).toBe(true);
+
+    const emaInput: BacktestInput = {
+      strategy: {
+        id: 'ema-rsi-strat',
+        name: 'EMA Cross + RSI Filter',
+        source: emaSource,
+        timeframe: '15m',
+        instrument: 'RELIANCE',
+      },
+      candles,
+      rangeLabel: '1Y',
+      params: { lookback: 100, stopLossPct: 1.5, positionSizePct: 10, rsiThreshold: 60 },
+      parsed: parsedEma,
+    };
+
+    const output = runBacktest(emaInput);
+    expect(output.run.status).toBe('complete');
+    expect(output.run.metrics.totalTrades).toBeGreaterThanOrEqual(0);
+    expect(output.series.strategy.length).toBeGreaterThan(0);
+    expect(output.series.drawdown.length).toBeGreaterThan(0);
   });
 });

@@ -10,9 +10,35 @@ import type { Diagnostic } from '@kinetix/shared';
  * operator as unsupported with a line number — never silently ignored.
  * ==========================================================================*/
 
+export interface EmaIndicator {
+  name: string;
+  period: number;
+}
+
 export interface IndicatorSet {
   bands: { period: number; sigma: number } | null;
   rsi: { period: number } | null;
+  emas: EmaIndicator[];
+}
+
+export interface EmaStrategyRule {
+  entry: {
+    fastEma: string;
+    slowEma: string;
+    operator: '>' | '<';
+    trendEma: string | null;
+    trendOperator: '>' | '<' | null;
+    rsiGate: { operator: '>' | '<'; value: number } | null;
+  };
+  exit: {
+    fastEma?: string;
+    slowEma?: string;
+    operator?: '>' | '<';
+    trendEma?: string | null;
+    trendOperator?: '>' | '<' | null;
+    rsiGate?: { operator: '>' | '<'; value: number } | null;
+    closePosition?: boolean;
+  } | null;
 }
 
 export interface ParsedRules {
@@ -27,6 +53,8 @@ export interface ParsedRules {
   } | null;
   exit: { comparator: 'upper' | 'lower' | 'basis'; operator: '>' | '<' } | null;
   order: { target: number; stopLossPct: number; tag: string } | null;
+  sellOrder?: { target: number; stopLossPct: number; tag: string } | null;
+  emaRule?: EmaStrategyRule | null;
 }
 
 export interface ParseResult {
@@ -57,7 +85,7 @@ const UNSUPPORTED_CONTROL = [
   { pattern: /\bclass\s+\w+\s*\(\s*(?!kx\.BaseStrategy)/, label: 'auxiliary class' },
 ];
 
-const KNOWN_INDICATORS = ['BollingerBands', 'RSI'];
+const KNOWN_INDICATORS = ['BollingerBands', 'RSI', 'EMA'];
 
 function lineOf(source: string, index: number): number {
   return source.slice(0, index).split('\n').length;
@@ -119,10 +147,12 @@ export function parseStrategy(source: string): ParseResult {
     className: null,
     declaredSymbol: null,
     declaredInterval: null,
-    indicators: { bands: null, rsi: null },
+    indicators: { bands: null, rsi: null, emas: [] },
     entry: null,
     exit: null,
     order: null,
+    sellOrder: null,
+    emaRule: null,
   };
 
   if (source.trim().length === 0) {
@@ -202,21 +232,42 @@ export function parseStrategy(source: string): ParseResult {
     supportedFeatures.push('RSI(period)');
   }
 
+  // EMA indicators
+  const emaMatches = [...source.matchAll(/(?:self\.)?(\w+)\s*=\s*(?:kx\.)?EMA\s*\(\s*period\s*=\s*(\d+)\s*\)/g)];
+  for (const match of emaMatches) {
+    const name = match[1] ?? '';
+    const period = Number(match[2]);
+    rules.indicators.emas.push({ name, period });
+    if (period < 2) {
+      diagnostics.push({
+        line: lineOf(source, match.index ?? 0),
+        column: 1,
+        severity: 'error',
+        message: `EMA '${name}' period must be at least 2`,
+      });
+    }
+  }
+  if (rules.indicators.emas.length > 0) {
+    supportedFeatures.push(`EMA(${rules.indicators.emas.map((e) => `${e.name}=${e.period}`).join(', ')})`);
+  }
+
   // Any indicator-shaped call the grammar does not implement is surfaced rather
   // than assumed away.
   const calledIndicators = [...source.matchAll(/\b([A-Z][A-Za-z0-9_]+)\s*\(/g)]
     // `class MomentumTrendStrategy(kx.BaseStrategy)` reads exactly like a call,
     // so the class header has to be excluded or every strategy would report its
-    // own name as an unknown indicator.
+    // own name as an unknown indicator. Also exclude comments.
     .filter((match) => {
       const index = match.index ?? 0;
       const lineStart = source.lastIndexOf('\n', index) + 1;
-      return !/\bclass\s+$/.test(source.slice(lineStart, index));
+      const linePrefix = source.slice(lineStart, index);
+      if (linePrefix.includes('#')) return false;
+      return !/\bclass\s+$/.test(linePrefix);
     })
     .map((match) => match[1] ?? '')
     .filter((name) => name.length > 0 && !KNOWN_INDICATORS.includes(name));
   for (const name of new Set(calledIndicators)) {
-    if (name === 'BollingerBands' || name === 'RSI') continue;
+    if (name === 'BollingerBands' || name === 'RSI' || name === 'EMA') continue;
     unsupportedFeatures.push(name);
     diagnostics.push({
       line: 1,
@@ -257,12 +308,47 @@ export function parseStrategy(source: string): ParseResult {
       });
     }
   } else {
-    diagnostics.push({
-      line: 1,
-      column: 1,
-      severity: 'error',
-      message: 'No supported entry condition found — expected `if candle.close > self.bands.upper`',
-    });
+    // Check for EMA crossover condition
+    const ifMatch = /if\s+([^\n:]+):/.exec(source);
+    if (ifMatch && rules.indicators.emas.length >= 2) {
+      const condText = ifMatch[1] ?? '';
+      const emaCompMatch = /self\.(\w+)\s*([><])\s*self\.(\w+)/.exec(condText);
+      const trendMatch = /candle\.close\s*([><])\s*self\.(\w+)/.exec(condText);
+      const rsiCondMatch = /self\.rsi(?:\.value)?\s*([><])\s*([\d.]+)/.exec(condText);
+
+      if (emaCompMatch) {
+        const fastEma = emaCompMatch[1] ?? '';
+        const operator = (emaCompMatch[2] ?? '>') as '>' | '<';
+        const slowEma = emaCompMatch[3] ?? '';
+        const trendOperator = trendMatch ? ((trendMatch[1] ?? '>') as '>' | '<') : null;
+        const trendEma = trendMatch ? (trendMatch[2] ?? null) : null;
+        const rsiGate = rsiCondMatch
+          ? { operator: (rsiCondMatch[1] ?? '>') as '>' | '<', value: Number(rsiCondMatch[2]) }
+          : null;
+
+        rules.emaRule = {
+          entry: {
+            fastEma,
+            slowEma,
+            operator,
+            trendEma,
+            trendOperator,
+            rsiGate,
+          },
+          exit: null,
+        };
+        supportedFeatures.push('entry: EMA cross + RSI gate + EMA trend filter');
+      }
+    }
+
+    if (!rules.entry && !rules.emaRule) {
+      diagnostics.push({
+        line: 1,
+        column: 1,
+        severity: 'error',
+        message: 'No supported entry condition found — expected `if candle.close > self.bands.upper` or `if self.ema_fast > self.ema_slow`',
+      });
+    }
   }
 
   // --- exit condition ---------------------------------------------------------
@@ -270,6 +356,30 @@ export function parseStrategy(source: string): ParseResult {
   if (exitMatch) {
     rules.exit = { operator: exitMatch[1] as '>' | '<', comparator: exitMatch[2] as 'upper' | 'lower' | 'basis' };
     supportedFeatures.push('exit: candle.close vs bands');
+  } else if (rules.emaRule) {
+    const elifMatch = /elif\s+([^\n:]+):/.exec(source);
+    if (elifMatch) {
+      const condText = elifMatch[1] ?? '';
+      const emaCompMatch = /self\.(\w+)\s*([><])\s*self\.(\w+)/.exec(condText);
+      const trendMatch = /candle\.close\s*([><])\s*self\.(\w+)/.exec(condText);
+      const rsiCondMatch = /self\.rsi(?:\.value)?\s*([><])\s*([\d.]+)/.exec(condText);
+
+      rules.emaRule.exit = {
+        fastEma: emaCompMatch ? emaCompMatch[1] : undefined,
+        slowEma: emaCompMatch ? emaCompMatch[3] : undefined,
+        operator: emaCompMatch ? ((emaCompMatch[2] ?? '<') as '>' | '<') : undefined,
+        trendEma: trendMatch ? (trendMatch[2] ?? null) : null,
+        trendOperator: trendMatch ? ((trendMatch[1] ?? '<') as '>' | '<') : null,
+        rsiGate: rsiCondMatch
+          ? { operator: (rsiCondMatch[1] ?? '<') as '>' | '<', value: Number(rsiCondMatch[2]) }
+          : null,
+        closePosition: /close_position/.test(source),
+      };
+      supportedFeatures.push('exit: EMA crossunder + sell filters');
+    } else if (/def\s+close_position/.test(source) || /self\.close_position\(\)/.test(source)) {
+      rules.emaRule.exit = { closePosition: true };
+      supportedFeatures.push('close_position()');
+    }
   } else if (/def\s+close_position/.test(source) || /self\.close_position\(\)/.test(source)) {
     supportedFeatures.push('close_position()');
   } else {
@@ -282,15 +392,22 @@ export function parseStrategy(source: string): ParseResult {
   }
 
   // --- order call -------------------------------------------------------------
-  const orderMatch = /order_target_percent\(\s*target\s*=\s*([\d.]+)\s*,\s*stop_loss_pct\s*=\s*([\d.]+)\s*,\s*tag\s*=\s*"([^"]+)"/.exec(
-    source,
-  );
-  if (orderMatch) {
+  const orderMatches = [
+    ...source.matchAll(/order_target_percent\(\s*target\s*=\s*([-\d.]+)\s*,\s*stop_loss_pct\s*=\s*([\d.]+)\s*,\s*tag\s*=\s*"([^"]+)"/g),
+  ];
+  if (orderMatches.length > 0 && orderMatches[0]) {
     rules.order = {
-      target: Number(orderMatch[1]),
-      stopLossPct: Number(orderMatch[2]),
-      tag: orderMatch[3] ?? '',
+      target: Number(orderMatches[0][1]),
+      stopLossPct: Number(orderMatches[0][2]),
+      tag: orderMatches[0][3] ?? '',
     };
+    if (orderMatches.length > 1 && orderMatches[1]) {
+      rules.sellOrder = {
+        target: Number(orderMatches[1][1]),
+        stopLossPct: Number(orderMatches[1][2]),
+        tag: orderMatches[1][3] ?? '',
+      };
+    }
     supportedFeatures.push('order_target_percent(target, stop_loss_pct, tag)');
   } else {
     diagnostics.push({
@@ -327,7 +444,13 @@ export function parseStrategy(source: string): ParseResult {
   }
 
   const hasError = diagnostics.some((diagnostic) => diagnostic.severity === 'error');
-  const interpretable = rules.entry !== null && rules.order !== null && rules.indicators.bands !== null;
+  const isBandsInterpretable = rules.entry !== null && rules.order !== null && rules.indicators.bands !== null;
+  const isEmaInterpretable =
+    rules.emaRule?.entry !== null &&
+    rules.emaRule !== null &&
+    rules.indicators.emas.length >= 2 &&
+    rules.order !== null;
+  const interpretable = isBandsInterpretable || isEmaInterpretable;
 
   return finish(!hasError && interpretable, diagnostics, supportedFeatures, unsupportedFeatures, rules, startedAt);
 }

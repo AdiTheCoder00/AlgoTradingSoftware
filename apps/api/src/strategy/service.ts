@@ -89,11 +89,65 @@ export interface StrategyService {
 
 export function defaultParamsForSource(source: string, overrides?: Record<string, number>): StrategyParam[] {
   const parsed = parseStrategy(source);
+  if (parsed.rules.emaRule) {
+    const emaMap = new Map((parsed.rules.indicators.emas ?? []).map((e) => [e.name, e.period]));
+    const trendEmaName = parsed.rules.emaRule.entry.trendEma;
+    const trendPeriod = trendEmaName ? (emaMap.get(trendEmaName) ?? 100) : 100;
+    const rawStop = parsed.rules.order ? parsed.rules.order.stopLossPct : 1.5;
+    const stopLossPct = rawStop <= 0.1 ? Number((rawStop * 100).toFixed(1)) : rawStop;
+    const rawTarget = parsed.rules.order ? Math.abs(parsed.rules.order.target) : 0.10;
+    const positionSizePct = rawTarget <= 1 ? Math.round(rawTarget * 100) : rawTarget;
+    const rsiVal = parsed.rules.emaRule.entry.rsiGate?.value ?? 60;
+
+    return [
+      {
+        key: 'lookback',
+        label: 'Trend EMA Lookback',
+        min: 20,
+        max: 200,
+        step: 5,
+        value: overrides?.lookback ?? trendPeriod,
+        defaultValue: trendPeriod,
+        unit: 'bars',
+      },
+      {
+        key: 'rsiThreshold',
+        label: 'RSI Threshold',
+        min: 45,
+        max: 85,
+        step: 1,
+        value: overrides?.rsiThreshold ?? rsiVal,
+        defaultValue: rsiVal,
+        unit: 'index',
+      },
+      {
+        key: 'stopLossPct',
+        label: 'Stop Loss',
+        min: 0.2,
+        max: 10.0,
+        step: 0.1,
+        value: overrides?.stopLossPct ?? stopLossPct,
+        defaultValue: stopLossPct,
+        unit: '%',
+      },
+      {
+        key: 'positionSizePct',
+        label: 'Position Size',
+        min: 1,
+        max: 50,
+        step: 1,
+        value: overrides?.positionSizePct ?? positionSizePct,
+        defaultValue: positionSizePct,
+        unit: '%',
+      },
+    ];
+  }
+
   const period = parsed.rules.indicators.bands?.period ?? 50;
   const sigma = parsed.rules.indicators.bands?.sigma ?? 2.4;
   const rawStop = parsed.rules.order ? parsed.rules.order.stopLossPct : 1.5;
   const stopLossPct = rawStop <= 0.1 ? Number((rawStop * 100).toFixed(1)) : rawStop;
-  const rawTarget = parsed.rules.order ? parsed.rules.order.target : 0.10;
+  const rawTarget = parsed.rules.order ? Math.abs(parsed.rules.order.target) : 0.10;
   const positionSizePct = rawTarget <= 1 ? Math.round(rawTarget * 100) : rawTarget;
   const rsiVal = parsed.rules.entry?.rsiGate?.value ?? (parsed.rules.indicators.rsi ? 50 : null);
 

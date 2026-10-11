@@ -4,7 +4,7 @@ import { getKotakAdapter } from '../brokers/index.ts';
 import { config } from '../config.ts';
 import { openDatabase, recordAuditEvent } from '../db/db.ts';
 import { createMarketSimulator, type MarketSimulator } from '../sim/market.ts';
-import { computeBands, computeRsi } from '../strategy/backtest.ts';
+import { computeBands, computeEma, computeRsi } from '../strategy/backtest.ts';
 import { createStrategyService, type StrategyService } from '../strategy/service.ts';
 import { createFleetService, type FleetService } from './fleet.ts';
 import { createPortfolioService, isRejected, type PortfolioService, type RejectedOrder } from './portfolio.ts';
@@ -205,11 +205,25 @@ export function createEngine(options: EngineOptions = {}): Engine {
         const instrument = bot.instrument ?? strategy.instrument;
         const candles = market.candles(instrument, strategy.timeframe, 160);
         const closes = candles.map((candle) => candle.c);
+        const isEma = Boolean(parsed.rules.emaRule);
         const lookback = Math.max(2, Math.round(params.lookback ?? 50));
-        if (closes.length < lookback + 3) continue;
+        if (closes.length < (isEma ? 30 : lookback + 3)) continue;
 
-        const bands = computeBands(closes, lookback, params.entrySigma ?? 2.4);
+        const bands = !isEma ? computeBands(closes, lookback, params.entrySigma ?? 2.4) : { basis: [], upper: [], lower: [] };
         const rsi = parsed.rules.indicators.rsi ? computeRsi(closes, parsed.rules.indicators.rsi.period) : null;
+
+        const emaMap = new Map((parsed.rules.indicators.emas ?? []).map((e) => [e.name, e.period]));
+        const fastEmaName = parsed.rules.emaRule?.entry.fastEma ?? '';
+        const slowEmaName = parsed.rules.emaRule?.entry.slowEma ?? '';
+        const trendEmaName = parsed.rules.emaRule?.entry.trendEma ?? null;
+
+        const fastPeriod = emaMap.get(fastEmaName) ?? 9;
+        const slowPeriod = emaMap.get(slowEmaName) ?? 21;
+        const trendPeriod = trendEmaName ? (emaMap.get(trendEmaName) ?? 100) : null;
+
+        const emaFast = isEma ? computeEma(closes, fastPeriod) : [];
+        const emaSlow = isEma ? computeEma(closes, slowPeriod) : [];
+        const emaTrend = isEma && trendPeriod ? computeEma(closes, trendPeriod) : null;
 
         const index = closes.length - 2; // last fully closed candle
         const previous = index - 1;
@@ -229,76 +243,117 @@ export function createEngine(options: EngineOptions = {}): Engine {
           .positions()
           .find((candidate) => candidate.strategyId === strategyId && candidate.symbol === instrument);
 
-      const entryComparator = parsed.rules.entry?.comparator ?? 'upper';
-      const entryLevel = bands[entryComparator][index];
-      const previousEntryLevel = bands[entryComparator][previous];
-      const gate = parsed.rules.entry?.rsiGate;
-      const rsiValue = rsi ? rsi[index] : null;
-      const gatePasses =
-        !gate || rsiValue === null || rsiValue === undefined
-          ? true
-          : gate.operator === '>'
-            ? rsiValue > (params.rsiThreshold ?? gate.value)
-            : rsiValue < (params.rsiThreshold ?? gate.value);
-      const entryOperator = parsed.rules.entry?.operator ?? '>';
+        let entrySignal = false;
+        let entrySide: 'buy' | 'sell' = 'buy';
 
-      // A fresh *cross* is required, not merely a level test. Testing the level
-      // alone would fire on every bar the band happens to be broken, which
-      // produced immediate, spurious entries and exits on a warm engine.
-      const crossesEntry =
-        entryLevel !== null &&
-        entryLevel !== undefined &&
-        previousEntryLevel !== null &&
-        previousEntryLevel !== undefined &&
-        (entryOperator === '>'
-          ? close > entryLevel && previousClose <= previousEntryLevel
-          : close < entryLevel && previousClose >= previousEntryLevel);
-      const entrySignal = gatePasses && crossesEntry;
+        if (isEma) {
+          const prevFast = emaFast[previous];
+          const prevSlow = emaSlow[previous];
+          const currFast = emaFast[index];
+          const currSlow = emaSlow[index];
+          const trendVal = emaTrend ? emaTrend[index] : null;
+          const rsiValue = rsi ? rsi[index] : null;
 
-      if (!position && entrySignal) {
-        const notionalUsd = bot.allocatedMarginUsd * ((params.positionSizePct ?? 10) / 100);
-        const outcome = placeOrder(
-          { symbol: instrument, side: entryOperator === '>' ? 'buy' : 'sell', type: 'market', notionalUsd },
-          { actor: `bot:${bot.id}`, strategyId, venue: bot.venue, leverage: bot.leverage, botId: bot.id },
-        );
-        botCooldown.set(`${bot.id}:${strategyId}`, Date.now() + 30_000);
-        strategies.appendLog(strategyId, {
-          level: isRejected(outcome) ? 'warn' : 'success',
-          scope: 'live',
-          message: isRejected(outcome)
-            ? `Order blocked: ${outcome.reason}`
-            : `${entryOperator === '>' ? 'LONG' : 'SHORT'} entry filled on ${instrument}`,
-          detail: `${bot.name} • ${notionalUsd.toFixed(0)} USD notional`,
-        });
-        continue;
-      }
+          const crossOver =
+            typeof currFast === 'number' &&
+            typeof currSlow === 'number' &&
+            typeof prevFast === 'number' &&
+            typeof prevSlow === 'number' &&
+            currFast > currSlow &&
+            prevFast <= prevSlow;
+          const buyRsi = typeof rsiValue === 'number' && rsiValue > (params.rsiThreshold ?? parsed.rules.emaRule?.entry.rsiGate?.value ?? 60);
+          const buyTrend = typeof trendVal === 'number' && close > trendVal;
 
-      if (position) {
-        const exitComparator = parsed.rules.exit?.comparator ?? 'basis';
-        const exitLevel = bands[exitComparator][index];
-        const previousExitLevel = bands[exitComparator][previous];
-        const exitOperator = parsed.rules.exit?.operator ?? '<';
-        const stopped = isStoppedOut(position.side, position.entryPrice, params.stopLossPct ?? 1.5, close);
-        const crossesExit =
-          exitLevel !== null &&
-          exitLevel !== undefined &&
-          previousExitLevel !== null &&
-          previousExitLevel !== undefined &&
-          (exitOperator === '>'
-            ? close > exitLevel && previousClose <= previousExitLevel
-            : close < exitLevel && previousClose >= previousExitLevel);
+          if (crossOver && buyRsi && buyTrend) {
+            entrySignal = true;
+            entrySide = 'buy';
+          }
+        } else {
+          const entryComparator = parsed.rules.entry?.comparator ?? 'upper';
+          const entryLevel = bands[entryComparator][index];
+          const previousEntryLevel = bands[entryComparator][previous];
+          const gate = parsed.rules.entry?.rsiGate;
+          const rsiValue = rsi ? rsi[index] : null;
+          const gatePasses =
+            !gate || rsiValue === null || rsiValue === undefined
+              ? true
+              : gate.operator === '>'
+                ? rsiValue > (params.rsiThreshold ?? gate.value)
+                : rsiValue < (params.rsiThreshold ?? gate.value);
+          const entryOperator = parsed.rules.entry?.operator ?? '>';
 
-        if (crossesExit || stopped) {
-          portfolio.closePosition(position.id, `bot:${bot.id}`);
+          const crossesEntry =
+            entryLevel !== null &&
+            entryLevel !== undefined &&
+            previousEntryLevel !== null &&
+            previousEntryLevel !== undefined &&
+            (entryOperator === '>'
+              ? close > entryLevel && previousClose <= previousEntryLevel
+              : close < entryLevel && previousClose >= previousEntryLevel);
+          entrySignal = gatePasses && crossesEntry;
+          entrySide = entryOperator === '>' ? 'buy' : 'sell';
+        }
+
+        if (!position && entrySignal) {
+          const notionalUsd = bot.allocatedMarginUsd * ((params.positionSizePct ?? 10) / 100);
+          const outcome = placeOrder(
+            { symbol: instrument, side: entrySide, type: 'market', notionalUsd },
+            { actor: `bot:${bot.id}`, strategyId, venue: bot.venue, leverage: bot.leverage, botId: bot.id },
+          );
           botCooldown.set(`${bot.id}:${strategyId}`, Date.now() + 30_000);
           strategies.appendLog(strategyId, {
-            level: 'info',
+            level: isRejected(outcome) ? 'warn' : 'success',
             scope: 'live',
-            message: `${stopped ? 'Stop loss' : 'Exit signal'} closed ${instrument}`,
-            detail: `${bot.name} • entry ${position.entryPrice} → mark ${position.markPrice}`,
+            message: isRejected(outcome)
+              ? `Order blocked: ${outcome.reason}`
+              : `${entrySide === 'buy' ? 'LONG' : 'SHORT'} entry filled on ${instrument}`,
+            detail: `${bot.name} • ${notionalUsd.toFixed(0)} USD notional`,
           });
+          continue;
         }
-      }
+
+        if (position) {
+          const stopped = isStoppedOut(position.side, position.entryPrice, params.stopLossPct ?? 1.5, close);
+          let crossesExit = false;
+
+          if (isEma) {
+            const prevFast = emaFast[previous];
+            const prevSlow = emaSlow[previous];
+            const currFast = emaFast[index];
+            const currSlow = emaSlow[index];
+            crossesExit =
+              typeof currFast === 'number' &&
+              typeof currSlow === 'number' &&
+              typeof prevFast === 'number' &&
+              typeof prevSlow === 'number' &&
+              currFast < currSlow &&
+              prevFast >= prevSlow;
+          } else {
+            const exitComparator = parsed.rules.exit?.comparator ?? 'basis';
+            const exitLevel = bands[exitComparator][index];
+            const previousExitLevel = bands[exitComparator][previous];
+            const exitOperator = parsed.rules.exit?.operator ?? '<';
+            crossesExit =
+              exitLevel !== null &&
+              exitLevel !== undefined &&
+              previousExitLevel !== null &&
+              previousExitLevel !== undefined &&
+              (exitOperator === '>'
+                ? close > exitLevel && previousClose <= previousExitLevel
+                : close < exitLevel && previousClose >= previousExitLevel);
+          }
+
+          if (crossesExit || stopped) {
+            portfolio.closePosition(position.id, `bot:${bot.id}`);
+            botCooldown.set(`${bot.id}:${strategyId}`, Date.now() + 30_000);
+            strategies.appendLog(strategyId, {
+              level: 'info',
+              scope: 'live',
+              message: `${stopped ? 'Stop loss' : 'Exit signal'} closed ${instrument}`,
+              detail: `${bot.name} • entry ${position.entryPrice} → mark ${position.markPrice}`,
+            });
+          }
+        }
       }
     }
   };

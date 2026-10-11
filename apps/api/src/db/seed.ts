@@ -182,6 +182,31 @@ class TrendRider(kx.BaseStrategy):
             self.close_position()
 `,
   },
+  {
+    id: 'seed-ema-rsi-trend',
+    name: 'EMA 9/21 Cross + RSI & 100 EMA Trend',
+    instrument: 'RELIANCE',
+    timeframe: '15m',
+    source: `import kinetix.algo as kx
+
+@kx.strategy(symbol="RELIANCE", interval="15m")
+class EmaCrossRsiFilter(kx.BaseStrategy):
+    def on_init(self):
+        # 9 EMA (Fast), 21 EMA (Slow), 100 EMA (Trend Filter) & 14 RSI
+        self.ema_fast = kx.EMA(period=9)
+        self.ema_slow = kx.EMA(period=21)
+        self.ema_trend = kx.EMA(period=100)
+        self.rsi = kx.RSI(period=14)
+
+    def on_candle(self, candle: kx.Candle):
+        # BUY: 9 EMA crosses above 21 EMA, RSI > 60, and Market (Close) > 100 EMA
+        if self.ema_fast > self.ema_slow and self.rsi > 60 and candle.close > self.ema_trend:
+            self.order_target_percent(target=0.10, stop_loss_pct=1.5, tag="EMA_Cross_Long")
+        # SELL: 9 EMA crosses below 21 EMA, RSI < 40, and Market (Close) < 100 EMA
+        elif self.ema_fast < self.ema_slow and self.rsi < 40 and candle.close < self.ema_trend:
+            self.order_target_percent(target=-0.10, stop_loss_pct=1.5, tag="EMA_Cross_Short")
+`,
+  },
 ] as const;
 
 const DEMO_BOTS = [

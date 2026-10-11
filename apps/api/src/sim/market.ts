@@ -229,7 +229,13 @@ export const INSTRUMENTS: readonly InstrumentSpec[] = [
 ];
 
 export function instrumentSpec(symbol: string): InstrumentSpec {
-  const spec = INSTRUMENTS.find((candidate) => candidate.symbol === symbol);
+  const spec = INSTRUMENTS.find(
+    (candidate) =>
+      candidate.symbol === symbol ||
+      candidate.base === symbol ||
+      candidate.displayName === symbol ||
+      candidate.symbol === `KOTAK:${symbol}`,
+  );
   if (!spec) throw new Error(`Unknown instrument: ${symbol}`);
   return spec;
 }

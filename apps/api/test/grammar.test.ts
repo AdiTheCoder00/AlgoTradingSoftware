@@ -103,4 +103,52 @@ describe('strategy grammar', () => {
     expect(parsed.ok).toBe(true);
     expect(parsed.supportedFeatures).toContain('close_position()');
   });
+
+  it('parses EMA crossover strategy with RSI filter and 100 EMA trend filter', () => {
+    const emaSource = `import kinetix.algo as kx
+
+@kx.strategy(symbol="RELIANCE", interval="15m")
+class EmaCrossRsiFilterStrategy(kx.BaseStrategy):
+    def on_init(self):
+        self.ema_fast = kx.EMA(period=9)
+        self.ema_slow = kx.EMA(period=21)
+        self.ema_trend = kx.EMA(period=100)
+        self.rsi = kx.RSI(period=14)
+
+    def on_candle(self, candle: kx.Candle):
+        if self.ema_fast > self.ema_slow and self.rsi > 60 and candle.close > self.ema_trend:
+            self.order_target_percent(target=0.10, stop_loss_pct=1.5, tag="EMA_Cross_Long")
+        elif self.ema_fast < self.ema_slow and self.rsi < 40 and candle.close < self.ema_trend:
+            self.order_target_percent(target=-0.10, stop_loss_pct=1.5, tag="EMA_Cross_Short")
+`;
+    const parsed = parseStrategy(emaSource);
+    expect(parsed.ok).toBe(true);
+    expect(parsed.astSynced).toBe(true);
+    expect(parsed.diagnostics.filter((d) => d.severity === 'error')).toEqual([]);
+    expect(parsed.rules.indicators.emas).toEqual([
+      { name: 'ema_fast', period: 9 },
+      { name: 'ema_slow', period: 21 },
+      { name: 'ema_trend', period: 100 },
+    ]);
+    expect(parsed.rules.indicators.rsi).toEqual({ period: 14 });
+    expect(parsed.rules.emaRule?.entry).toEqual({
+      fastEma: 'ema_fast',
+      slowEma: 'ema_slow',
+      operator: '>',
+      trendEma: 'ema_trend',
+      trendOperator: '>',
+      rsiGate: { operator: '>', value: 60 },
+    });
+    expect(parsed.rules.emaRule?.exit).toEqual({
+      fastEma: 'ema_fast',
+      slowEma: 'ema_slow',
+      operator: '<',
+      trendEma: 'ema_trend',
+      trendOperator: '<',
+      rsiGate: { operator: '<', value: 40 },
+      closePosition: false,
+    });
+    expect(parsed.rules.order).toEqual({ target: 0.1, stopLossPct: 1.5, tag: 'EMA_Cross_Long' });
+    expect(parsed.rules.sellOrder).toEqual({ target: -0.1, stopLossPct: 1.5, tag: 'EMA_Cross_Short' });
+  });
 });

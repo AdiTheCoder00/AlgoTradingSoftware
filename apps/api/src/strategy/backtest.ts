@@ -54,6 +54,27 @@ export interface BacktestOutput {
 
 /* ------------------------------- indicators ------------------------------- */
 
+/** Exponential Moving Average. First period uses SMA, then applies multiplier 2/(period+1). */
+export function computeEma(values: readonly number[], period: number): Array<number | null> {
+  const out: Array<number | null> = new Array(values.length).fill(null);
+  if (period <= 0 || values.length < period) return out;
+
+  let sum = 0;
+  for (let i = 0; i < period; i += 1) {
+    sum += values[i] ?? 0;
+  }
+  let prevEma = sum / period;
+  out[period - 1] = prevEma;
+
+  const multiplier = 2 / (period + 1);
+  for (let i = period; i < values.length; i += 1) {
+    const val = values[i] ?? 0;
+    prevEma = val * multiplier + prevEma * (1 - multiplier);
+    out[i] = prevEma;
+  }
+  return out;
+}
+
 export function computeSma(values: readonly number[], period: number): Array<number | null> {
   const out: Array<number | null> = new Array(values.length).fill(null);
   if (period <= 0) return out;
@@ -200,14 +221,23 @@ export interface InterpretedParams {
 export function resolveParams(params: Record<string, number>, parsed: ParseResult): InterpretedParams {
   const bandsPeriod = parsed.rules.indicators.bands?.period;
   const bandsSigma = parsed.rules.indicators.bands?.sigma;
+  const trendEma = parsed.rules.indicators.emas?.find((e) => e.period >= 50)?.period;
+  const rawStop = parsed.rules.order ? parsed.rules.order.stopLossPct : 1.5;
+  const stopLossPct = rawStop <= 0.1 ? Number((rawStop * 100).toFixed(1)) : rawStop;
+  const rawTarget = parsed.rules.order ? Math.abs(parsed.rules.order.target) : 0.10;
+  const positionSizePct = rawTarget <= 1 ? Math.round(rawTarget * 100) : rawTarget;
+  const rsiThreshold =
+    params.rsiThreshold ??
+    parsed.rules.entry?.rsiGate?.value ??
+    parsed.rules.emaRule?.entry?.rsiGate?.value ??
+    null;
+
   return {
-    lookback: Math.max(2, Math.round(params.lookback ?? bandsPeriod ?? 50)),
+    lookback: Math.max(2, Math.round(params.lookback ?? bandsPeriod ?? trendEma ?? 50)),
     entrySigma: Math.max(0.1, params.entrySigma ?? bandsSigma ?? 2.4),
-    // The panel expresses the stop as a percentage (1.5), the grammar as a
-    // fraction (0.015). Normalise to a percentage here, once.
-    stopLossPct: params.stopLossPct ?? (parsed.rules.order ? parsed.rules.order.stopLossPct * 100 : 1.5),
-    positionSizePct: params.positionSizePct ?? (parsed.rules.order ? parsed.rules.order.target * 100 : 10),
-    rsiThreshold: params.rsiThreshold ?? parsed.rules.entry?.rsiGate?.value ?? null,
+    stopLossPct: params.stopLossPct ?? stopLossPct,
+    positionSizePct: params.positionSizePct ?? positionSizePct,
+    rsiThreshold,
   };
 }
 
@@ -268,8 +298,23 @@ export function runBacktest(input: BacktestInput): BacktestOutput {
   const slippageRate = SLIPPAGE_BPS / 10_000;
 
   const closes = candles.map((candle) => candle.c);
-  const bands = computeBands(closes, params.lookback, params.entrySigma);
+  const isEmaStrategy = Boolean(parsed.rules.emaRule);
+
+  const bands = !isEmaStrategy ? computeBands(closes, params.lookback, params.entrySigma) : { basis: [], upper: [], lower: [] };
   const rsi = parsed.rules.indicators.rsi ? computeRsi(closes, parsed.rules.indicators.rsi.period) : null;
+
+  const emaMap = new Map((parsed.rules.indicators.emas ?? []).map((e) => [e.name, e.period]));
+  const fastEmaName = parsed.rules.emaRule?.entry.fastEma ?? '';
+  const slowEmaName = parsed.rules.emaRule?.entry.slowEma ?? '';
+  const trendEmaName = parsed.rules.emaRule?.entry.trendEma ?? null;
+
+  const fastPeriod = emaMap.get(fastEmaName) ?? 9;
+  const slowPeriod = emaMap.get(slowEmaName) ?? 21;
+  const trendPeriod = trendEmaName ? (emaMap.get(trendEmaName) ?? 100) : null;
+
+  const emaFast = isEmaStrategy ? computeEma(closes, fastPeriod) : [];
+  const emaSlow = isEmaStrategy ? computeEma(closes, slowPeriod) : [];
+  const emaTrend = isEmaStrategy && trendPeriod ? computeEma(closes, trendPeriod) : null;
 
   const entryComparator = parsed.rules.entry?.comparator ?? 'upper';
   const entryOperator = parsed.rules.entry?.operator ?? '>';
@@ -346,65 +391,189 @@ export function runBacktest(input: BacktestInput): BacktestOutput {
       }
     }
 
-    // --- band exit ----------------------------------------------------------
+    // --- exit ---------------------------------------------------------------
     if (open) {
-      const exitLevel = valueOf(exitComparator, i);
-      if (exitLevel !== null && compare(close, exitOperator, exitLevel)) {
-        const exitPrice = open.side === 'long' ? candle.o * (1 - slippageRate) : candle.o * (1 + slippageRate);
-        const direction = open.side === 'long' ? 1 : -1;
-        const gross = (exitPrice - open.entryPrice) * open.quantity * direction;
-        const fees = exitPrice * open.quantity * feeRate;
-        totalFees += fees;
-        totalSlippage += candle.o * open.quantity * slippageRate;
-        equity += gross - fees;
+      if (isEmaStrategy) {
+        const prevFast = emaFast[i - 1];
+        const prevSlow = emaSlow[i - 1];
+        const currFast = emaFast[i];
+        const currSlow = emaSlow[i];
+        const trendVal = emaTrend ? emaTrend[i] : null;
+        const rsiVal = rsi ? rsi[i] : null;
 
-        trades.push({
-          id: `tr_${trades.length + 1}`,
-          side: open.side,
-          entryTs: open.entryTime,
-          exitTs: candle.t,
-          entryPrice: Number(open.entryPrice.toFixed(2)),
-          exitPrice: Number(exitPrice.toFixed(2)),
-          quantity: Number(open.quantity.toFixed(6)),
-          pnlUsd: Number((gross - fees).toFixed(2)),
-          pnlPct: Number((((exitPrice - open.entryPrice) / open.entryPrice) * 100 * direction).toFixed(4)),
-          rMultiple: Number(
-            ((exitPrice - open.entryPrice) * direction / Math.max(1e-9, open.entryPrice * (params.stopLossPct / 100))).toFixed(2),
-          ),
-          tag: parsed.rules.order?.tag ?? 'Exit',
-        });
-        open = null;
+        let exitTriggered = false;
+        if (open.side === 'long') {
+          const crossUnder =
+            typeof currFast === 'number' &&
+            typeof currSlow === 'number' &&
+            typeof prevFast === 'number' &&
+            typeof prevSlow === 'number' &&
+            currFast < currSlow &&
+            prevFast >= prevSlow;
+
+          if (parsed.rules.emaRule?.exit && !parsed.rules.emaRule.exit.closePosition) {
+            const trendOk = parsed.rules.emaRule.exit.trendEma && typeof trendVal === 'number'
+              ? close < trendVal
+              : true;
+            const rsiThreshold = 100 - (params.rsiThreshold ?? parsed.rules.emaRule?.entry.rsiGate?.value ?? 60);
+            const rsiOk = parsed.rules.emaRule.exit.rsiGate && typeof rsiVal === 'number'
+              ? rsiVal < rsiThreshold
+              : true;
+            exitTriggered = crossUnder && trendOk && rsiOk;
+          } else {
+            exitTriggered = crossUnder;
+          }
+        } else {
+          // Short position exit: crossOver
+          const crossOver =
+            typeof currFast === 'number' &&
+            typeof currSlow === 'number' &&
+            typeof prevFast === 'number' &&
+            typeof prevSlow === 'number' &&
+            currFast > currSlow &&
+            prevFast <= prevSlow;
+          exitTriggered = crossOver;
+        }
+
+        if (exitTriggered) {
+          const exitPrice = open.side === 'long' ? candle.o * (1 - slippageRate) : candle.o * (1 + slippageRate);
+          const direction = open.side === 'long' ? 1 : -1;
+          const gross = (exitPrice - open.entryPrice) * open.quantity * direction;
+          const fees = exitPrice * open.quantity * feeRate;
+          totalFees += fees;
+          totalSlippage += candle.o * open.quantity * slippageRate;
+          equity += gross - fees;
+
+          trades.push({
+            id: `tr_${trades.length + 1}`,
+            side: open.side,
+            entryTs: open.entryTime,
+            exitTs: candle.t,
+            entryPrice: Number(open.entryPrice.toFixed(2)),
+            exitPrice: Number(exitPrice.toFixed(2)),
+            quantity: Number(open.quantity.toFixed(6)),
+            pnlUsd: Number((gross - fees).toFixed(2)),
+            pnlPct: Number((((exitPrice - open.entryPrice) / open.entryPrice) * 100 * direction).toFixed(4)),
+            rMultiple: Number(
+              ((exitPrice - open.entryPrice) * direction / Math.max(1e-9, open.entryPrice * (params.stopLossPct / 100))).toFixed(2),
+            ),
+            tag: parsed.rules.order?.tag ?? 'EMA_Cross_Exit',
+          });
+          open = null;
+        }
+      } else {
+        const exitLevel = valueOf(exitComparator, i);
+        if (exitLevel !== null && compare(close, exitOperator, exitLevel)) {
+          const exitPrice = open.side === 'long' ? candle.o * (1 - slippageRate) : candle.o * (1 + slippageRate);
+          const direction = open.side === 'long' ? 1 : -1;
+          const gross = (exitPrice - open.entryPrice) * open.quantity * direction;
+          const fees = exitPrice * open.quantity * feeRate;
+          totalFees += fees;
+          totalSlippage += candle.o * open.quantity * slippageRate;
+          equity += gross - fees;
+
+          trades.push({
+            id: `tr_${trades.length + 1}`,
+            side: open.side,
+            entryTs: open.entryTime,
+            exitTs: candle.t,
+            entryPrice: Number(open.entryPrice.toFixed(2)),
+            exitPrice: Number(exitPrice.toFixed(2)),
+            quantity: Number(open.quantity.toFixed(6)),
+            pnlUsd: Number((gross - fees).toFixed(2)),
+            pnlPct: Number((((exitPrice - open.entryPrice) / open.entryPrice) * 100 * direction).toFixed(4)),
+            rMultiple: Number(
+              ((exitPrice - open.entryPrice) * direction / Math.max(1e-9, open.entryPrice * (params.stopLossPct / 100))).toFixed(2),
+            ),
+            tag: parsed.rules.order?.tag ?? 'Exit',
+          });
+          open = null;
+        }
       }
     }
 
     // --- entry, filled at the next bar's open -------------------------------
     if (!open) {
-      const entryLevel = valueOf(entryComparator, i);
-      const gate = parsed.rules.entry?.rsiGate;
-      const rsiValue = rsi ? rsi[i] : null;
-      // The RSI gate's comparison operator comes from the source; the threshold
-      // value may be overridden by the parameter panel if one is supplied.
-      let gatePasses = true;
-      if (gate) {
-        const threshold = params.rsiThreshold ?? gate.value;
-        gatePasses =
-          rsiValue === null || rsiValue === undefined ? false : compare(rsiValue, gate.operator, threshold);
-      }
+      if (isEmaStrategy) {
+        const prevFast = emaFast[i - 1];
+        const prevSlow = emaSlow[i - 1];
+        const currFast = emaFast[i];
+        const currSlow = emaSlow[i];
+        const trendVal = emaTrend ? emaTrend[i] : null;
+        const rsiVal = rsi ? rsi[i] : null;
 
-      if (entryLevel !== null && compare(close, entryOperator, entryLevel) && gatePasses) {
-        // Filled at the next bar's open: no signal can be traded on the bar that
-        // produced it, which is what keeps the result free of lookahead bias.
+        // Buy condition: 9 EMA crosses above 21 EMA from below + RSI > 60 + Close > 100 EMA
+        const crossOver =
+          typeof currFast === 'number' &&
+          typeof currSlow === 'number' &&
+          typeof prevFast === 'number' &&
+          typeof prevSlow === 'number' &&
+          currFast > currSlow &&
+          prevFast <= prevSlow;
+        const buyRsiThreshold = params.rsiThreshold ?? parsed.rules.emaRule?.entry.rsiGate?.value ?? 60;
+        const buyRsiOk = typeof rsiVal === 'number' && rsiVal > buyRsiThreshold;
+        const buyTrendOk = typeof trendVal === 'number' && close > trendVal;
+
+        // Sell condition: 9 EMA crosses below 21 EMA from above + RSI < 40 + Close < 100 EMA
+        const crossUnder =
+          typeof currFast === 'number' &&
+          typeof currSlow === 'number' &&
+          typeof prevFast === 'number' &&
+          typeof prevSlow === 'number' &&
+          currFast < currSlow &&
+          prevFast >= prevSlow;
+        const sellRsiThreshold = 100 - buyRsiThreshold;
+        const sellRsiOk = typeof rsiVal === 'number' && rsiVal < sellRsiThreshold;
+        const sellTrendOk = typeof trendVal === 'number' && close < trendVal;
+
         const next = candles[i + 1];
         if (next) {
-          const notional = equity * (params.positionSizePct / 100);
-          const side: 'long' | 'short' = entryOperator === '>' ? 'long' : 'short';
-          const entryPrice = side === 'long' ? next.o * (1 + slippageRate) : next.o * (1 - slippageRate);
-          const quantity = notional / entryPrice;
-          const entryFee = notional * feeRate;
-          totalFees += entryFee;
-          totalSlippage += next.o * quantity * slippageRate;
-          equity -= entryFee;
-          open = { entryTime: next.t, entryPrice, quantity, side };
+          if (crossOver && buyRsiOk && buyTrendOk) {
+            const notional = equity * (params.positionSizePct / 100);
+            const side: 'long' | 'short' = 'long';
+            const entryPrice = next.o * (1 + slippageRate);
+            const quantity = notional / entryPrice;
+            const entryFee = notional * feeRate;
+            totalFees += entryFee;
+            totalSlippage += next.o * quantity * slippageRate;
+            equity -= entryFee;
+            open = { entryTime: next.t, entryPrice, quantity, side };
+          } else if (crossUnder && sellRsiOk && sellTrendOk && parsed.rules.sellOrder) {
+            const notional = equity * (params.positionSizePct / 100);
+            const side: 'long' | 'short' = 'short';
+            const entryPrice = next.o * (1 - slippageRate);
+            const quantity = notional / entryPrice;
+            const entryFee = notional * feeRate;
+            totalFees += entryFee;
+            totalSlippage += next.o * quantity * slippageRate;
+            equity -= entryFee;
+            open = { entryTime: next.t, entryPrice, quantity, side };
+          }
+        }
+      } else {
+        const entryLevel = valueOf(entryComparator, i);
+        const gate = parsed.rules.entry?.rsiGate;
+        const rsiValue = rsi ? rsi[i] : null;
+        let gatePasses = true;
+        if (gate) {
+          const threshold = params.rsiThreshold ?? gate.value;
+          gatePasses =
+            rsiValue === null || rsiValue === undefined ? false : compare(rsiValue, gate.operator, threshold);
+        }
+
+        if (entryLevel !== null && compare(close, entryOperator, entryLevel) && gatePasses) {
+          const next = candles[i + 1];
+          if (next) {
+            const notional = equity * (params.positionSizePct / 100);
+            const side: 'long' | 'short' = entryOperator === '>' ? 'long' : 'short';
+            const entryPrice = side === 'long' ? next.o * (1 + slippageRate) : next.o * (1 - slippageRate);
+            const quantity = notional / entryPrice;
+            const entryFee = notional * feeRate;
+            totalFees += entryFee;
+            totalSlippage += next.o * quantity * slippageRate;
+            equity -= entryFee;
+            open = { entryTime: next.t, entryPrice, quantity, side };
+          }
         }
       }
     }
